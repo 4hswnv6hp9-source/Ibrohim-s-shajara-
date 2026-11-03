@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Boir avlodlari shajarasi</title>
+<style>
+:root{--bg:#1c130e;--card:#2a1d15;--line:#4b3524;--ink:#f2e7d5;--mut:#b09878;--gold:#e0a75e;--m:#78a893;--f:#d28b9c;box-sizing:border-box}
+*{box-sizing:inherit}
+body{margin:0;background:radial-gradient(circle at 50% -10%,#3a2618,var(--bg) 60%) fixed;color:var(--ink);font:16px/1.4 Georgia,"Times New Roman",serif;padding:max(18px,env(safe-area-inset-top)) 14px max(40px,env(safe-area-inset-bottom))}
+main{max-width:720px;margin:0 auto}
+h1{font-size:2rem;line-height:1.1;margin:.2em 0 .15em}
+.sub{color:var(--mut);margin:0 0 1em}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+input,button{font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+input{flex:1 1 180px;min-width:0}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+ul{list-style:none;margin:0;padding:0}
+ul ul{margin-left:18px;padding-left:16px;border-left:2.5px solid var(--b)}
+li{position:relative;margin:9px 0}
+ul ul>li::before{content:"";position:absolute;left:-16px;top:27px;width:16px;border-top:2.5px solid var(--b)}
+ul ul>li:last-child::after{content:"";position:absolute;left:-19px;top:28px;bottom:0;width:4px;background:var(--bg)}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.card{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.who{display:flex;align-items:center;gap:10px;min-width:0}
+.av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#1c130e;background:var(--m)}
+.f .av{background:var(--f)}
+.who b{font-weight:700}
+.who i{font-style:normal;color:var(--mut)}
+.who small{display:block;color:var(--mut);font-size:.8rem}
+.ring{color:var(--gold)}
+.gen{margin-left:auto;font-size:.75rem;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:1px 9px;white-space:nowrap}
+summary .gen::after{content:" \25BE"}
+details:not([open])>summary .gen::after{content:" \25B8"}
+.hit .av{box-shadow:0 0 0 3px var(--gold)}
+.s .who:not(.hit){opacity:.4}
+.root .av{background:var(--gold);font-size:1.3rem}
+footer{color:var(--mut);font-size:.8rem;margin-top:26px}
+</style>
+</head>
+<body>
+<main>
+<h1>Boir avlodlari shajarasi</h1>
+<p class="sub" id="st"></p>
+<div class="bar">
+  <input id="q" type="search" placeholder="Ism bo‘yicha qidirish" aria-label="Ism bo‘yicha qidirish">
+  <button id="open">Hammasini ochish</button>
+  <button id="shut">Yig‘ish</button>
+</div>
+<ul id="tree"></ul>
+<footer>Ism yoki yilni o‘zgartirish uchun faylning pastidagi <code>T</code> ro‘yxatini tahrirlang.</footer>
+</main>
+<script>
+/* MA'LUMOT: n = ism familiya, y = tug'ilgan yil, g = m/f, sp = turmush o'rtog'i, k = farzandlar */
+const T={n:"Boir",g:"m",root:1,k:[
+{n:"Abduraxmon (Dexqon) Boirov",g:"m",sp:{n:"Salomat",g:"f"},k:[
+ {n:"Jannat Abduraxmanova",y:1959,g:"f",sp:{n:"Xaidboy Narkulov",g:"m"},k:[
+  {n:"Shaxlo Narkulova",y:1981,g:"f",sp:{n:"Boxodir Narkulov",y:1977,g:"m"},k:[
+   {n:"Ibroxim Narkulov",y:2007,g:"m"}]},
+  {n:"Iroda Xakimova",y:1984,g:"f",k:[
+   {n:"Azizbek Xakimov",g:"m"},
+   {n:"Sig’diyona Xakimov",y:2013,g:"f"},
+   {n:"Marat Xakimov",y:2015,g:"m"}]},
+  {n:"Baxtiyor Xakimov",y:1987,g:"m",sp:{n:"Kumush Xakimova",y:1994,g:"f"},k:[
+   {n:"Asadbek Anvarjonov",y:2017,g:"m"},
+   {n:"Muslima Anvarjonova",y:2018,g:"f"},
+   {n:"Muhammad Iso Anvarjonov",y:2021,g:"m"}]},
+  {n:"Boxodir Xakimov",y:1991,g:"m",sp:{n:"Durdona Xakimova",g:"f"},k:[
+   {n:"Firdavus Anvarjonov",y:2016,g:"m"},
+   {n:"Imron Anvarjonov",y:2019,g:"m"},
+   {n:"Kamron Anvarjonov",y:2021,g:"m"}]}]},
+ {n:"Sherzod Abduraxmanov",y:1961,g:"m"},
+ {n:"Sherali Abduraxmanov",y:1962,g:"m"},
+ {n:"Jamilya Abduraxmanova",y:1964,g:"f"},
+ {n:"Salixa Abduraxmanova",y:1966,g:"f"},
+ {n:"Ochil Abduraxmanov",y:1967,g:"m",sp:{n:"Feruza Abduraxmanova",g:"f"},k:[
+  {n:"Sunnat Dexqanov",y:2006,g:"m"}]}
+]}]};
+
+const Y=new Date().getFullYear(),C=["#e0a75e","#c98a5a","#78a893","#d28b9c","#8a9fd1"];
+let N=0,D=0;
+const who=(p,c="")=>{
+  const i=p.n.lastIndexOf(" "),a=i<0?p.n:p.n.slice(0,i),b=i<0?"":p.n.slice(i+1);
+  return `<span class="who ${p.g} ${c}"><span class="av">${p.root?"🌳":a[0]}</span><span><b>${a}</b> <i>${b}</i><small>${p.y?p.y+" · "+(Y-p.y)+" yosh":"yili noma’lum"}</small></span></span>`;
+};
+function node(p,d){
+  N+=1+(p.sp?1:0);D=Math.max(D,d+1);
+  const li=document.createElement("li"),k=p.k||[];
+  const card=document.createElement("div");card.className="card";
+  card.innerHTML=who(p,p.root?"root":"")+(p.sp?`<span class="ring">💍</span>`+who(p.sp):"")+`<span class="gen">${d+1}-avlod</span>`;
+  if(!k.length){li.append(card);card.querySelector(".gen").style.visibility="visible";return li}
+  const dt=document.createElement("details"),s=document.createElement("summary"),u=document.createElement("ul");
+  dt.open=true;u.style.setProperty("--b",C[Math.min(d,4)]);
+  s.append(card);k.forEach(x=>u.append(node(x,d+1)));dt.append(s,u);li.append(dt);return li;
+}
+document.getElementById("tree").append(node(T,0));
+document.getElementById("st").textContent=`${N} kishi · ${D} avlod`;
+const all=o=>document.querySelectorAll("details").forEach(d=>d.open=o);
+document.getElementById("open").onclick=()=>all(true);
+document.getElementById("shut").onclick=()=>all(false);
+const q=document.getElementById("q");
+q.oninput=()=>{
+  const v=q.value.trim().toLowerCase();
+  document.body.classList.toggle("s",!!v);
+  document.querySelectorAll(".who").forEach(w=>w.classList.toggle("hit",!!v&&w.textContent.toLowerCase().includes(v)));
+  if(v)all(true);
+};
+</script>
+</body>
+</html>
